@@ -23,18 +23,17 @@ export class Usuario {
                 return this.#senhaHash;
         }
 
-        
         // Setters
 
         set nome(novoNome) {
                 if (typeof novoNome != 'string') return;
 
-                this.nome = novoNome;
+                this.#nome = novoNome;
         }
 
         set senhaHash(novoSenhaHash) {
                 if (typeof novoSenhaHash != 'string') return;
 
-                this.senhaHash = novoSenhaHash;
+                this.#senhaHash = novoSenhaHash;
         }
 }
