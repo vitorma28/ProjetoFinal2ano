@@ -1,0 +1,19 @@
+DBConnection:
+        Gerencia uma conexão com o banco de dados SQLite.
+
+        MÉTODOS
+                constructor(dbfilename: string)
+
+                getConnection() : Database | null
+
+                async open() : Database
+
+                async close()
+
+
+        EXPLICAÇÃO
+                getConnection => Obtém a conexão atual, existindo ou não.
+
+                open => Abre uma conexão e a retorna; se já existir, retorna a existente.
+
+                close => Fecha uma conexão aberta.

@@ -1,0 +1,18 @@
+<model>
+        Representa uma entidade no código
+
+
+        MÉTODOS
+                static build(values) : Model
+
+                static columnsToInsert() : string[]
+
+                dataToInsert() : any[]
+
+
+        EXPLICAÇÃO
+                build => Constrói o objeto com os valores do parâmetro.
+
+                columnsToInsert => Obtém o nome das colunas da entidade.
+
+                dataToInsert => Valores da linha do registro atual.

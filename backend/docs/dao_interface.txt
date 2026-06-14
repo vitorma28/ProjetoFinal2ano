@@ -1,0 +1,26 @@
+<model>DAO:
+        Gerencia um modelo dentro do banco.
+
+
+        MÉTODOS
+                async insert(model)
+
+                async remove(id)
+
+                async getAll() : model[]
+
+                async getById(id) : model
+
+                async update(id, modelColumns)
+        
+
+        EXPLICAÇÃO
+                insert => Insere um modelo na tabela.
+
+                remove => Remove um modelo na tabela pelo ID.
+
+                getAll => Obtém todos os modelos na tabela.
+
+                getById => Obtém um modelo específico pelo ID.
+                
+                update => Atualiza colunas específicas de um modelo. Colunas não mencionadas não serão alteradas.
