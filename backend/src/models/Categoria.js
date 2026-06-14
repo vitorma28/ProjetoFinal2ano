@@ -7,6 +7,18 @@ export class Categoria {
                 this.nome = nome;
         }
 
+        static build({ id = 0, nome = '' }) {
+                return new Categoria(id, nome);
+        }
+
+        static columnsToInsert() {
+                return ['nome'];
+        }
+
+        dataToInsert() {
+                return [this.#nome];
+        }
+
         // Getters
 
         get id() {

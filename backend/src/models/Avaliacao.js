@@ -16,6 +16,23 @@ export class Avaliacao {
                 this.usuarioId = usuarioId;
         }
 
+        static build({
+                id = 0,
+                avaliacao = 0,
+                postId = 0,
+                usuarioId = 0
+        }) {
+                return new Avaliacao(id, avaliacao, postId, usuarioId);
+        }
+
+        static columnsToInsert() {
+                return ['avaliacao', 'postId', 'usuarioId'];
+        }
+
+        dataToInsert() {
+                return [this.#avaliacao, this.#postId, this.#usuarioId];
+        }
+
         // Getters
 
         get id() {

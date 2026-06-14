@@ -19,6 +19,24 @@ export class Post {
                 this.usuarioId = usuarioId;
         }
 
+        static build({
+                id = 0,
+                titulo = '',
+                conteudo = '',
+                categoriaId = 0,
+                usuarioId = 0
+        }) {
+                return new Post(id, titulo, conteudo, categoriaId, usuarioId);
+        }
+
+        static columnsToInsert() {
+                return ['titulo', 'conteudo', 'categoriaId', 'usuarioId'];
+        }
+
+        dataToInsert() {
+                return [this.#titulo, this.#conteudo, this.#categoriaId, this.#usuarioId];
+        }
+
         // Getters
 
         get id() {

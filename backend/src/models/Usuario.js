@@ -9,6 +9,18 @@ export class Usuario {
                 this.senhaHash = senhaHash;
         }
 
+        static build({ id = 0, nome = '', senhaHash = '' }) {
+                return new Usuario(id, nome, senhaHash);
+        }
+
+        static columnsToInsert() {
+                return ['nome', 'senhaHash'];
+        }
+
+        dataToInsert() {
+                return [this.#nome, this.#senhaHash];
+        }
+
         // Getters
 
         get id() {

@@ -16,6 +16,23 @@ export class Comentario {
                 this.usuarioId = usuarioId;
         }
 
+        static build({
+                id = 0,
+                conteudo = '',
+                postId = 0,
+                usuarioId = 0
+        }) {
+                return new Comentario(id, conteudo, postId, usuarioId);
+        }
+
+        static columnsToInsert() {
+                return ['conteudo', 'postId', 'usuarioId'];
+        }
+
+        dataToInsert() {
+                return [this.#conteudo, this.#postId, this.#usuarioId];
+        }
+
         // Getters
 
         get id() {
