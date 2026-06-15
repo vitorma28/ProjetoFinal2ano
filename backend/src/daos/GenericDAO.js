@@ -22,10 +22,9 @@ export class GenericDAO {
                 const data = model.dataToInsert();
                 const questionmarks = data.map(() => '?').join(', ');
 
-                let conn;
 
                 try {
-                        conn = await this.#connection.open();
+                        const conn = await this.#connection.open();
 
                         await conn.run(`INSERT INTO ${this.#tablename} (${columns}) VALUES (${questionmarks})`, ...data);
                 }
@@ -33,15 +32,14 @@ export class GenericDAO {
                         console.error('Erro ao executar \'insert\'.\n' + err);
                 }
                 finally {
-                        await conn?.close();
+                        await this.#connection.close();
                 }
         }
 
         async remove(id) {
-                let conn;
 
                 try {
-                        conn = await this.#connection.open();
+                        const conn = await this.#connection.open();
 
                         await conn.run(`DELETE FROM ${this.#tablename} WHERE id = ?`, id);
                 }
@@ -49,15 +47,14 @@ export class GenericDAO {
                         console.error('Erro ao executar \'remove\'.\n' + err);
                 }
                 finally {
-                        await conn?.close();
+                        await this.#connection.close();
                 }
         }
         
         async getAll() {
-                let conn;
 
                 try {
-                        conn = await this.#connection.open();
+                        const conn = await this.#connection.open();
 
                         const rows = await conn.all(`SELECT * FROM ${this.#tablename}`);
 
@@ -71,10 +68,9 @@ export class GenericDAO {
         }
         
         async getById(id) {
-                let conn;
 
                 try {
-                        conn = await this.#connection.open();
+                        const conn = await this.#connection.open();
 
                         const model = await conn.get(`SELECT * FROM ${this.#tablename} WHERE id = ?`, id);
 
@@ -98,10 +94,9 @@ export class GenericDAO {
                 const setStringArr = keys.map(k => `${k} = ?`);
                 const setString = setStringArr.join(', ');
 
-                let conn;
 
                 try {
-                        conn = await this.#connection.open();
+                        const conn = await this.#connection.open();
 
                         await conn.run(`UPDATE ${this.#tablename} SET ${setString} WHERE id = ?`, ...values, id);
                 }
@@ -109,7 +104,7 @@ export class GenericDAO {
                         console.error('Erro ao executar \'update\'.\n' + err);
                 }
                 finally {
-                        await conn?.close();
+                        await this.#connection.close();
                 }
 
         }
