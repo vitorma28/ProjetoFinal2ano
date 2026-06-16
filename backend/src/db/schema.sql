@@ -2,7 +2,9 @@ CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     nome TEXT NOT NULL UNIQUE,
-    senhaHash TEXT NOT NULL
+    senhaHash TEXT NOT NULL,
+    tipo TEXT NOT NULL CHECK (tipo IN ('admin', 'default')),
+    fotoPerfil TEXT NOT NULL
 );
 
 
@@ -18,6 +20,7 @@ CREATE TABLE IF NOT EXISTS posts (
 
     titulo TEXT NOT NULL,
     conteudo TEXT NOT NULL,
+    fotoApresentacao TEXT NOT NULL,
 
     categoriaId INTEGER NOT NULL,
     usuarioId INTEGER NOT NULL,
@@ -62,8 +65,10 @@ CREATE TABLE IF NOT EXISTS comentarios (
     usuarioId INTEGER NOT NULL,
 
     FOREIGN KEY (postId)
-        REFERENCES posts(id),
+        REFERENCES posts(id)
+        ON DELETE CASCADE,
 
     FOREIGN KEY (usuarioId)
         REFERENCES usuarios(id)
+        ON DELETE CASCADE
 );

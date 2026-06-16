@@ -2,6 +2,7 @@ export class Post {
         #id = 0;
         #titulo = '';
         #conteudo = '';
+        #fotoApresentacao = '';
         #categoriaId = 0;
         #usuarioId = 0;
 
@@ -9,12 +10,14 @@ export class Post {
                 id = 0,
                 titulo = '',
                 conteudo = '',
+                fotoApresentacao = '',
                 categoriaId = 0,
                 usuarioId = 0
         ) {
                 this.#id = id;
                 this.titulo = titulo;
                 this.conteudo = conteudo;
+                this.fotoApresentacao = fotoApresentacao
                 this.categoriaId = categoriaId;
                 this.usuarioId = usuarioId;
         }
@@ -23,18 +26,19 @@ export class Post {
                 id = 0,
                 titulo = '',
                 conteudo = '',
+                fotoApresentacao = '',
                 categoriaId = 0,
                 usuarioId = 0
         }) {
-                return new Post(id, titulo, conteudo, categoriaId, usuarioId);
+                return new Post(id, titulo, conteudo, fotoApresentacao, categoriaId, usuarioId);
         }
 
         static columnsToInsert() {
-                return ['titulo', 'conteudo', 'categoriaId', 'usuarioId'];
+                return ['titulo', 'conteudo', 'fotoApresentacao', 'categoriaId', 'usuarioId'];
         }
 
         dataToInsert() {
-                return [this.#titulo, this.#conteudo, this.#categoriaId, this.#usuarioId];
+                return [this.#titulo, this.#conteudo, this.#fotoApresentacao, this.#categoriaId, this.#usuarioId];
         }
 
         // Getters

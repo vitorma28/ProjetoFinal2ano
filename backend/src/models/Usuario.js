@@ -3,23 +3,25 @@ export class Usuario {
         #nome = '';
         #senhaHash = '';
         #tipo = '';
+        #fotoPerfil = '';
 
-        constructor(id = 0, nome = '', senhaHash = '', tipo = '') {
+        constructor(id = 0, nome = '', senhaHash = '', tipo = '', fotoPerfil = '') {
                 this.#id = id;
                 this.nome = nome;
                 this.senhaHash = senhaHash;
+                this.fotoPerfil = fotoPerfil
         }
 
-        static build({ id = 0, nome = '', senhaHash = '', tipo = '' }) {
-                return new Usuario(id, nome, senhaHash, tipo);
+        static build({ id = 0, nome = '', senhaHash = '', tipo = '', fotoPerfil = '' }) {
+                return new Usuario(id, nome, senhaHash, tipo, fotoPerfil);
         }
 
         static columnsToInsert() {
-                return ['nome', 'senhaHash', 'tipo'];
+                return ['nome', 'senhaHash', 'tipo', 'fotoPerfil'];
         }
 
         dataToInsert() {
-                return [this.#nome, this.#senhaHash, this.#tipo];
+                return [this.#nome, this.#senhaHash, this.#tipo, this.#fotoPerfil];
         }
 
         // Getters
@@ -40,6 +42,10 @@ export class Usuario {
                 return this.#tipo;
         }
 
+        get fotoPerfil() {
+                return this.#fotoPerfil;
+        }
+
         // Setters
 
         set nome(novoNome) {
@@ -58,5 +64,11 @@ export class Usuario {
                 if (typeof novoTipo != 'string') return;
 
                 this.#tipo = novoTipo;
+        }
+
+        set fotoPerfil(novaFotoPerfil) {
+                if (typeof novaFotoPerfil != 'string') return;
+
+                this.#fotoPerfil = novaFotoPerfil;
         }
 }
