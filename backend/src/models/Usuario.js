@@ -2,23 +2,24 @@ export class Usuario {
         #id = 0;
         #nome = '';
         #senhaHash = '';
+        #tipo = '';
 
-        constructor(id = 0, nome = '', senhaHash = '') {
+        constructor(id = 0, nome = '', senhaHash = '', tipo = '') {
                 this.#id = id;
                 this.nome = nome;
                 this.senhaHash = senhaHash;
         }
 
-        static build({ id = 0, nome = '', senhaHash = '' }) {
-                return new Usuario(id, nome, senhaHash);
+        static build({ id = 0, nome = '', senhaHash = '', tipo = '' }) {
+                return new Usuario(id, nome, senhaHash, tipo);
         }
 
         static columnsToInsert() {
-                return ['nome', 'senhaHash'];
+                return ['nome', 'senhaHash', 'tipo'];
         }
 
         dataToInsert() {
-                return [this.#nome, this.#senhaHash];
+                return [this.#nome, this.#senhaHash, this.#tipo];
         }
 
         // Getters
@@ -35,6 +36,10 @@ export class Usuario {
                 return this.#senhaHash;
         }
 
+        get tipo() {
+                return this.#tipo;
+        }
+
         // Setters
 
         set nome(novoNome) {
@@ -47,5 +52,11 @@ export class Usuario {
                 if (typeof novoSenhaHash != 'string') return;
 
                 this.#senhaHash = novoSenhaHash;
+        }
+
+        set tipo(novoTipo) {
+                if (typeof novoTipo != 'string') return;
+
+                this.#tipo = novoTipo;
         }
 }
