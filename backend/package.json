@@ -14,7 +14,8 @@
     "#config/*": "./src/config/*"
   },
   "scripts": {
-    "test": "node tests/test.js"
+    "test": "node tests/test.js",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",

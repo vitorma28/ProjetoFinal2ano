@@ -1,6 +1,7 @@
 import { Usuario, Avaliacao, Categoria, Comentario, Post } from '#models';
 import { GenericDAO } from './Generic.dao.js';
 
+export { GenericDAO };
 
 export class UsuarioDAO extends GenericDAO {
         constructor(connection = null) {

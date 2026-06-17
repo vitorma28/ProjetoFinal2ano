@@ -1,8 +1,10 @@
 import express from 'express';
 
-const UsuarioRoutes = express.Router();
+export function usuarioRoutes(usuarioController) {
+    const usuarioRoutes = express.Router();
 
-UsuarioRoutes.get('/');
-UsuarioRoutes.get('/:id');
+    usuarioRoutes.get('/', usuarioController.getAll.bind(usuarioController));
+    usuarioRoutes.get('/:id', usuarioController.getById.bind(usuarioController));
 
-export { UsuarioRoutes };
+    return usuarioRoutes;
+}
