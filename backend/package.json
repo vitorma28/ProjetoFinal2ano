@@ -7,6 +7,9 @@
   "imports": {
     "#models": "./src/models/index.js",
     "#daos": "./src/daos/index.js",
+    "#services": "./src/services/index.js",
+    "#controllers": "./src/controllers/index.js",
+    "#routes": "./src/routes/index.js",
     "#db/*": "./src/db/*",
     "#config/*": "./src/config/*"
   },
