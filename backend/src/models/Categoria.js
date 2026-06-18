@@ -19,6 +19,21 @@ export class Categoria {
                 return [this.#nome];
         }
 
+        toJSON(...ocult) {
+                const keys = Categoria.columnsToInsert();
+                const values = this.dataToInsert();
+
+                let obj = {};
+
+                for (const i in keys) {
+                        if (ocult.includes(keys[i])) continue;
+                        
+                        obj[keys[i]] = values[i];
+                }
+
+                return obj;
+        }
+
         // Getters
 
         get id() {

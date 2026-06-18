@@ -33,6 +33,21 @@ export class Comentario {
                 return [this.#conteudo, this.#postId, this.#usuarioId];
         }
 
+        toJSON(...ocult) {
+                const keys = Comentario.columnsToInsert();
+                const values = this.dataToInsert();
+
+                let obj = {};
+
+                for (const i in keys) {
+                        if (ocult.includes(keys[i])) continue;
+                        
+                        obj[keys[i]] = values[i];
+                }
+
+                return obj;
+        }
+
         // Getters
 
         get id() {

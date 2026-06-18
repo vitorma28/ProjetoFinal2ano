@@ -9,7 +9,8 @@ export class Usuario {
                 this.#id = id;
                 this.nome = nome;
                 this.senhaHash = senhaHash;
-                this.fotoPerfil = fotoPerfil
+                this.tipo = tipo;
+                this.fotoPerfil = fotoPerfil;
         }
 
         static build({ id = 0, nome = '', senhaHash = '', tipo = '', fotoPerfil = '' }) {
@@ -22,6 +23,21 @@ export class Usuario {
 
         dataToInsert() {
                 return [this.#nome, this.#senhaHash, this.#tipo, this.#fotoPerfil];
+        }
+
+        toJSON(...ocult) {
+                const keys = Usuario.columnsToInsert();
+                const values = this.dataToInsert();
+
+                let obj = {};
+
+                for (const i in keys) {
+                        if (ocult.includes(keys[i])) continue;
+                        
+                        obj[keys[i]] = values[i];
+                }
+
+                return obj;
         }
 
         // Getters

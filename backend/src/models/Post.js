@@ -41,6 +41,21 @@ export class Post {
                 return [this.#titulo, this.#conteudo, this.#fotoApresentacao, this.#categoriaId, this.#usuarioId];
         }
 
+        toJSON(...ocult) {
+                const keys = Post.columnsToInsert();
+                const values = this.dataToInsert();
+
+                let obj = {};
+
+                for (const i in keys) {
+                        if (ocult.includes(keys[i])) continue;
+                        
+                        obj[keys[i]] = values[i];
+                }
+
+                return obj;
+        }
+
         // Getters
 
         get id() {
