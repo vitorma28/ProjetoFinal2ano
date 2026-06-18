@@ -1,6 +1,6 @@
 import express from 'express';
 import { authMiddleware } from '#middlewares/authMiddleware.js'
-import { selfOrAdminMiddleware } from '#middlewares/authorizationMiddleware.js'
+import { isUsuarioOwner } from '#middlewares/isUsuarioOwner.js'
 
 export function usuarioRoutes(usuarioController) {
     const router = express.Router();
@@ -21,17 +21,17 @@ export function usuarioRoutes(usuarioController) {
     );
 
     router.get(
-        '/:id', authMiddleware, selfOrAdminMiddleware(usuarioController.usuarioService),
+        '/:id', authMiddleware,
         usuarioController.getById.bind(usuarioController)
     );
 
     router.patch(
-        '/:id', authMiddleware, selfOrAdminMiddleware(usuarioController.usuarioService),
+        '/:id', authMiddleware, isUsuarioOwner(usuarioController.usuarioService),
         usuarioController.update.bind(usuarioController)
     );
 
     router.delete(
-        '/:id', authMiddleware, selfOrAdminMiddleware(usuarioController.usuarioService),
+        '/:id', authMiddleware, isUsuarioOwner(usuarioController.usuarioService),
         usuarioController.remove.bind(usuarioController)
     );
 

@@ -1,4 +1,4 @@
-export function selfOrAdminMiddleware(usuarioService) {
+export function isUsuarioOwner(usuarioService) {
     return async (req, res, next) => {
         const userId = req.user.id;
         const targetId = Number(req.params.id);
@@ -7,7 +7,17 @@ export function selfOrAdminMiddleware(usuarioService) {
             return next();
         }
 
-        const user = await usuarioService.getById(userId);
+        let user
+
+        try {
+            user = await usuarioService.getById(userId);
+        }
+        catch (err) {
+            return res.status(err.status).json({
+                message: err.message
+            });
+        }
+        
 
         if (!user) {
             return res.status(401).json({ message: 'Usuário inválido' });

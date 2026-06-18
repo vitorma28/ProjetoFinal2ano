@@ -1,7 +1,8 @@
 import express from 'express';
 import { authMiddleware } from '#middlewares/authMiddleware.js'
+import { isPostOwner } from '#middlewares/isPostOwner.js';
 
-export function postRoutes(postController) {
+export function postRoutes(postController, usuarioService) {
     const postRoutes = express.Router();
 
     postRoutes.post(
@@ -20,12 +21,12 @@ export function postRoutes(postController) {
     );
 
     postRoutes.patch(
-        '/:id', authMiddleware,
+        '/:id', authMiddleware, isPostOwner(postController.postService, usuarioService),
         postController.update.bind(postController)
     );
 
     postRoutes.delete(
-        '/:id', authMiddleware,
+        '/:id', authMiddleware, isPostOwner(postController.postService, usuarioService),
         postController.remove.bind(postController)
     );
 
