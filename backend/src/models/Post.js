@@ -42,8 +42,8 @@ export class Post {
         }
 
         toJSON(...ocult) {
-                const keys = Post.columnsToInsert();
-                const values = this.dataToInsert();
+                const keys = ['id', ...Post.columnsToInsert()];
+                const values = [this.#id, ...this.dataToInsert()];
 
                 let obj = {};
 

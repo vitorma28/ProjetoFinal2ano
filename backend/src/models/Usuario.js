@@ -26,8 +26,8 @@ export class Usuario {
         }
 
         toJSON(...ocult) {
-                const keys = Usuario.columnsToInsert();
-                const values = this.dataToInsert();
+                const keys = ['id', ...Usuario.columnsToInsert()];
+                const values = [this.#id, ...this.dataToInsert()];
 
                 let obj = {};
 

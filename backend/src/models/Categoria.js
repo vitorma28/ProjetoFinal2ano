@@ -20,8 +20,8 @@ export class Categoria {
         }
 
         toJSON(...ocult) {
-                const keys = Categoria.columnsToInsert();
-                const values = this.dataToInsert();
+                const keys = ['id', ...Categoria.columnsToInsert()];
+                const values = [this.#id, ...this.dataToInsert()];
 
                 let obj = {};
 

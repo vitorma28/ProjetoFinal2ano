@@ -34,8 +34,8 @@ export class Comentario {
         }
 
         toJSON(...ocult) {
-                const keys = Comentario.columnsToInsert();
-                const values = this.dataToInsert();
+                const keys = ['id', ...Comentario.columnsToInsert()];
+                const values = [this.#id, ...this.dataToInsert()];
 
                 let obj = {};
 

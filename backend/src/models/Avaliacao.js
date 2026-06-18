@@ -34,8 +34,8 @@ export class Avaliacao {
         }
 
         toJSON(...ocult) {
-                const keys = Avaliacao.columnsToInsert();
-                const values = this.dataToInsert();
+                const keys = ['id', ...Avaliacao.columnsToInsert()];
+                const values = [this.#id, ...this.dataToInsert()];
 
                 let obj = {};
 

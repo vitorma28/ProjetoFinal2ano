@@ -1,23 +1,29 @@
 import { HTTPError } from "../services/HTTPError.js";
 
-export class CategoriaController {
-    #categoriaService;
+export class PostController {
+    #postService;
 
-    constructor(categoriaService) {
-        this.#categoriaService = categoriaService;
+    constructor(postService) {
+        this.#postService = postService;
     }
 
     async create(req, res) {
-        const { nome } = req.body;
-
-        if (typeof nome !== 'string') {
-            return res.status(400).json({
-                message: 'Dados inválidos.'
-            });
-        }
+        const {
+            titulo,
+            conteudo,
+            fotoApresentacao,
+            categoriaId,
+            usuarioId
+        } = req.body;
 
         try {
-            await this.#categoriaService.create(nome);
+            await this.#postService.create(
+                titulo,
+                conteudo,
+                fotoApresentacao,
+                categoriaId,
+                usuarioId
+            );
 
             return res.sendStatus(201);
         }
@@ -46,7 +52,7 @@ export class CategoriaController {
         }
 
         try {
-            await this.#categoriaService.remove(id);
+            await this.#postService.remove(id);
 
             return res.sendStatus(204);
         }
@@ -87,7 +93,7 @@ export class CategoriaController {
         }
 
         try {
-            await this.#categoriaService.update(
+            await this.#postService.update(
                 id,
                 changes
             );
@@ -111,11 +117,11 @@ export class CategoriaController {
 
     async getAll(req, res) {
         try {
-            const categorias =
-                await this.#categoriaService.getAll();
+            const posts =
+                await this.#postService.getAll();
 
             return res.json(
-                categorias.map(c => c.toJSON())
+                posts.map(p => p.toJSON())
             );
         }
         catch (err) {
@@ -137,11 +143,11 @@ export class CategoriaController {
         }
 
         try {
-            const categoria =
-                await this.#categoriaService.getById(id);
+            const post =
+                await this.#postService.getById(id);
 
             return res.json(
-                categoria.toJSON()
+                post.toJSON()
             );
         }
         catch (err) {

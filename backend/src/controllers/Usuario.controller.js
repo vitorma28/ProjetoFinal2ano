@@ -1,4 +1,4 @@
-import { HTTPError } from "../services/HTTPError";
+import { HTTPError } from "../services/HTTPError.js";
 
 export class UsuarioController {
     #usuarioService;

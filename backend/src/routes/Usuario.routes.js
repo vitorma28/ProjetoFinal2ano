@@ -1,10 +1,32 @@
 import express from 'express';
 
 export function usuarioRoutes(usuarioController) {
-    const usuarioRoutes = express.Router();
+    const router = express.Router();
 
-    usuarioRoutes.get('/', usuarioController.getAll.bind(usuarioController));
-    usuarioRoutes.get('/:id', usuarioController.getById.bind(usuarioController));
+    router.post(
+        '/',
+        usuarioController.create.bind(usuarioController)
+    );
 
-    return usuarioRoutes;
+    router.get(
+        '/',
+        usuarioController.getAll.bind(usuarioController)
+    );
+
+    router.get(
+        '/:id',
+        usuarioController.getById.bind(usuarioController)
+    );
+
+    router.patch(
+        '/:id',
+        usuarioController.update.bind(usuarioController)
+    );
+
+    router.delete(
+        '/:id',
+        usuarioController.remove.bind(usuarioController)
+    );
+
+    return router;
 }
