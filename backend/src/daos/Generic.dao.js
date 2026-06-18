@@ -22,7 +22,6 @@ export class GenericDAO {
                 const data = model.dataToInsert();
                 const questionmarks = data.map(() => '?').join(', ');
 
-
                 try {
                         const conn = await this.#connection.open();
 
@@ -37,7 +36,6 @@ export class GenericDAO {
         }
 
         async remove(id) {
-
                 try {
                         const conn = await this.#connection.open();
 
@@ -52,7 +50,6 @@ export class GenericDAO {
         }
         
         async getAll() {
-
                 try {
                         const conn = await this.#connection.open();
 
@@ -68,7 +65,6 @@ export class GenericDAO {
         }
         
         async getById(id) {
-
                 try {
                         const conn = await this.#connection.open();
 
