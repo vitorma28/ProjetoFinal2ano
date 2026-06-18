@@ -23,6 +23,36 @@ export class UsuarioService {
                 this.#usuarioDAO = usuarioDAO;
         }
 
+        async login(nome, senhaRaw) {
+                const usuarios = await this.#usuarioDAO.getAll();
+
+                const usuario = usuarios.find(u => u.nome === nome);
+
+                if (!usuario) {
+                        throw new HTTPError(401, 'Credenciais inválidas.');
+                }
+
+                const ok = await bcryptjs.compare(
+                        senhaRaw,
+                        usuario.senhaHash
+                );
+
+                if (!ok) {
+                        throw new HTTPError(401, 'Credenciais inválidas.');
+                }
+
+                const token = jwt.sign(
+                        {
+                                id: usuario.id,
+                                nome: usuario.nome
+                        },
+                        JWT_SECRET,
+                        { expiresIn: '2h' }
+                );
+
+                return token;
+        }
+
         async create(name, senhaRaw, tipo) {
                 const users = await this.#usuarioDAO.getAll();
 

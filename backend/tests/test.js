@@ -45,7 +45,7 @@ async function main() {
             body: JSON.stringify({
                 nome: 'vitor',
                 senha: '123456',
-                tipo: 'comum'
+                tipo: 'default'
             })
         });
 

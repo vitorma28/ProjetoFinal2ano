@@ -11,10 +11,10 @@ import { configurate } from '#config/configurate.js';
 
 dotenv.config();
 
-const { PORT, DBFILENAME } = process.env;
+const { PORT, DBFILENAME, DEBUG } = process.env;
 
 async function main() {
-    const conn = await configurate(DBFILENAME);
+    const conn = await configurate(DBFILENAME, DEBUG);
 
     const app = express();
     app.use(express.json());

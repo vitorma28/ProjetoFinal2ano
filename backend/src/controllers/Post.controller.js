@@ -7,6 +7,10 @@ export class PostController {
         this.#postService = postService;
     }
 
+    get postService() {
+        return this.#postService;
+    }
+
     async create(req, res) {
         const {
             titulo,
@@ -29,7 +33,7 @@ export class PostController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -58,7 +62,7 @@ export class PostController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -102,7 +106,7 @@ export class PostController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -152,7 +156,7 @@ export class PostController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }

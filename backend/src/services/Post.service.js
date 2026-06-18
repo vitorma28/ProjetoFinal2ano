@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import { GenericDAO } from "#daos";
-import { Usuario } from "#models";
+import { Post } from "#models";
 import { HTTPError } from './HTTPError.js';
 
 

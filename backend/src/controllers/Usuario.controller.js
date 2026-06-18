@@ -1,10 +1,39 @@
 import { HTTPError } from "../services/HTTPError.js";
 
+
 export class UsuarioController {
     #usuarioService;
 
     constructor(usuarioService) {
         this.#usuarioService = usuarioService;
+    }
+
+    get usuarioService() {
+        return this.#usuarioService;
+    }
+
+    async login(req, res) {
+        const { nome, senha } = req.body;
+
+        try {
+            const token = await this.#usuarioService.login(
+                nome,
+                senha
+            );
+
+            return res.json({ token });
+        }
+        catch (err) {
+            if (err instanceof HTTPError) {
+                return res.status(err.code).json({
+                    message: err.message
+                });
+            }
+
+            return res.status(500).json({
+                message: 'Erro interno do servidor.'
+            });
+        }
     }
 
     async update(req, res) {
@@ -38,7 +67,7 @@ export class UsuarioController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -79,7 +108,7 @@ export class UsuarioController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -108,7 +137,7 @@ export class UsuarioController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -150,7 +179,7 @@ export class UsuarioController {
 
             console.error(err);
 
-            return res.status(err.code).json({ message: err.message });
+            return res.status(err.status).json({ message: err.message });
         }
     }
 }

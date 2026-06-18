@@ -7,6 +7,10 @@ export class CategoriaController {
         this.#categoriaService = categoriaService;
     }
 
+    get categoriaService() {
+        return this.#categoriaService;
+    }
+
     async create(req, res) {
         const { nome } = req.body;
 
@@ -23,7 +27,7 @@ export class CategoriaController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -52,7 +56,7 @@ export class CategoriaController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -96,7 +100,7 @@ export class CategoriaController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }
@@ -146,7 +150,7 @@ export class CategoriaController {
         }
         catch (err) {
             if (err instanceof HTTPError) {
-                return res.status(err.code).json({
+                return res.status(err.status).json({
                     message: err.message
                 });
             }

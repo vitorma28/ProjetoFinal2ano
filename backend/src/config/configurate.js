@@ -15,7 +15,7 @@ async function fileExists(path) {
   }
 }
 
-export async function configurate(dbfilename) {
+export async function configurate(dbfilename, debugging = '0') {
         const filename = path.join(__dirname, '..', dbfilename);
 
         if (!(await fileExists(filename))) {
@@ -26,7 +26,7 @@ export async function configurate(dbfilename) {
 
         if ((await fs.readFile(filename, 'utf-8')).length == 0) {
                 await config(conn);
-                await seeddb(conn);
+                await seeddb(conn, debugging != '0');
         }
 
         return conn;
