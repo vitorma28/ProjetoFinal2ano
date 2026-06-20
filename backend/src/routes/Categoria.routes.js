@@ -1,31 +1,32 @@
 import express from 'express';
-import { authMiddleware } from '#middlewares/authMiddleware.js'
+import { authMiddleware } from '#middlewares/authMiddleware.js';
+import { isAdmin } from '#middlewares/isAdmin.js';
 
-export function categoriaRoutes(categoriaController) {
+export function categoriaRoutes(categoriaController, usuarioService) {
     const categoriaRoutes = express.Router();
 
     categoriaRoutes.post(
-        '/', authMiddleware,
+        '/', authMiddleware, isAdmin(usuarioService),
         categoriaController.create.bind(categoriaController)
     );
 
     categoriaRoutes.get(
-        '/', authMiddleware,
+        '/',
         categoriaController.getAll.bind(categoriaController)
     );
 
     categoriaRoutes.get(
-        '/:id', authMiddleware,
+        '/:id',
         categoriaController.getById.bind(categoriaController)
     );
 
     categoriaRoutes.patch(
-        '/:id', authMiddleware,
+        '/:id', authMiddleware, isAdmin(usuarioService),
         categoriaController.update.bind(categoriaController)
     );
 
     categoriaRoutes.delete(
-        '/:id', authMiddleware,
+        '/:id', authMiddleware, isAdmin(usuarioService),
         categoriaController.remove.bind(categoriaController)
     );
 

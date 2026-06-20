@@ -11,17 +11,17 @@ export function usuarioRoutes(usuarioController) {
     );
 
     router.post(
-        '/', authMiddleware,
+        '/',
         usuarioController.create.bind(usuarioController)
     );
 
     router.get(
-        '/', authMiddleware,
+        '/',
         usuarioController.getAll.bind(usuarioController)
     );
 
     router.get(
-        '/:id', authMiddleware,
+        '/:id',
         usuarioController.getById.bind(usuarioController)
     );
 

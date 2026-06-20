@@ -11,12 +11,12 @@ export function postRoutes(postController, usuarioService) {
     );
 
     postRoutes.get(
-        '/', authMiddleware,
+        '/',
         postController.getAll.bind(postController)
     );
 
     postRoutes.get(
-        '/:id', authMiddleware,
+        '/:id',
         postController.getById.bind(postController)
     );
 

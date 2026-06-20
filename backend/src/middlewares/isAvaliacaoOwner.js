@@ -1,28 +1,32 @@
-export function isUsuarioOwner(usuarioService) {
+export function isAvaliacaoOwner(avaliacaoService, usuarioService) {
     return async (req, res, next) => {
         const userId = parseInt(req.user.id);
-        const targetId = parseInt(req.params.id);
+        const avaliacaoId = parseInt(req.params.id);
 
         let user;
+        let avaliacao;
 
         try {
             user = await usuarioService.getById(userId);
+            avaliacao = await avaliacaoService.getById(avaliacaoId);
         }
         catch (err) {
-            return res.status(err.status).json({
+            return res.status(err.code).json({
                 message: err.message
             });
         }
 
-        if (userId === targetId) {
-            return next();
-        }
-
         if (!user) {
-            return res.status(401).json({ message: 'Usuário inválido' });
+            return res.status(401).json({
+                message: 'Usuário inválido'
+            });
         }
 
         if (user.tipo === 'admin') {
+            return next();
+        }
+
+        if (avaliacao.usuarioId === userId) {
             return next();
         }
 

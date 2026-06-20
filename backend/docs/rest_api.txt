@@ -1,0 +1,6 @@
+GET /
+GET /usuarios
+GET /usuarios/:id
+POST /usuarios
+DELETE /usuarios/:id
+PATCH /usuarios/:id
